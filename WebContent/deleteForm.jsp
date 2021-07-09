@@ -19,8 +19,8 @@ GuestBookVo gvo = gDao.getPost(guestbookNo);
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="./delete.jsp" method="get">
-		비밀번호: <input type="text" name="pwcom" value=""> <input
+	<form action="./delete.jsp" method="post">
+		비밀번호: <input type="password" name="pwcom" value=""> <input
 			type="hidden" name="no" value=<%=gvo.getNo()%>>
 		<button type="submit">등록</button>
 	</form>

@@ -19,7 +19,7 @@ List<GuestBookVo> pList = gdao.getPostList();
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="./addList.jsp" method="get">
+	<form action="./addList.jsp" method="post">
 		<table border="1">
 			<colgroup>
 				<col style="width: 40px;">
@@ -31,7 +31,7 @@ List<GuestBookVo> pList = gdao.getPostList();
 				<td>이름</td>
 				<td><input type="text" name="name" value=""></td>
 				<td>비밀번호</td>
-				<td><input type="text" name="pw" value=""></td>
+				<td><input type="password" name="pw" value=""></td>
 			</tr>
 			<tr>
 				<td colspan="4" rowspan="3" height="120px"><input type="text"
