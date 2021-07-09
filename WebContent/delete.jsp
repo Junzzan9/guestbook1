@@ -1,3 +1,4 @@
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -7,28 +8,13 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-int pwc = Integer.parseInt(request.getParameter("pwcom"));
-int dNo = Integer.parseInt(request.getParameter("dNo"));
+int no = Integer.parseInt(request.getParameter("no"));
+String password = request.getParameter("pwcom");
 
-GuestBookDao gDao = new GuestBookDao();
-List<GuestBookVo> pList = gDao.getPostList();
-int dNo2=Integer.parseInt(pList.get(dNo).getPw());
-if (pwc == dNo2) {
-	gDao.postDelete(pList.get(dNo));
-}
+GuestBookVo guestbookVo = new GuestBookVo(no, password);
 
+GuestBookDao guestbookDao = new GuestBookDao();
+guestbookDao.postDelete(guestbookVo);
+
+response.sendRedirect("./addList.jsp");
 %>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<%
-	response.sendRedirect("./list.jsp");
-	%>
-</body>
-</html>

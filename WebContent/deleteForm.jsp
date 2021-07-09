@@ -3,11 +3,13 @@
 
 <%@page import="com.javaex.dao.GuestBookDao"%>
 <%@page import="com.javaex.vo.GuestBookVo"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
 
 <%
+GuestBookDao gDao = new GuestBookDao();
 String dNo = request.getParameter("id");
+int guestbookNo = Integer.parseInt(dNo);
+
+GuestBookVo gvo = gDao.getPost(guestbookNo);
 %>
 
 <!DOCTYPE html>
@@ -19,10 +21,10 @@ String dNo = request.getParameter("id");
 <body>
 	<form action="./delete.jsp" method="get">
 		비밀번호: <input type="text" name="pwcom" value=""> <input
-			type="hidden" name="dNo" value=<%=dNo%>>
+			type="hidden" name="no" value=<%=gvo.getNo()%>>
 		<button type="submit">등록</button>
 	</form>
 
-
+	<a href="./list.jsp">메인으로 돌아가기</a>
 </body>
 </html>

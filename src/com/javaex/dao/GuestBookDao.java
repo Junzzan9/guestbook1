@@ -87,16 +87,19 @@ public class GuestBookDao {
 	public int postDelete(GuestBookVo gvo) {
 		int count = 0;
 		getConnection();
-
+		System.out.println(gvo);
 		try {
 
 			// 3. SQL문 준비 / 바인딩 / 실행
-			String query = ""; // 쿼리문 문자열만들기, ? 주의
-			query += " delete from guestbook1 ";
-			query += " where no = ? ";
-			// System.out.println(query);
+			String query = "";  
+	        query += " delete from guestbook1 "; 
+	        query += " where no = ? ";
+	        query += " and password = ? ";
+		    pstmt = conn.prepareStatement(query); 
+		    pstmt.setInt(1,gvo.getNo());
+		    pstmt.setString(2,gvo.getPw());
+		    System.out.println(query);
 
-			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
 
 			count = pstmt.executeUpdate(); // 쿼리문 실행
 
@@ -169,5 +172,42 @@ public class GuestBookDao {
 
 		return postList;
 
+	}
+	public GuestBookVo getPost(int guestbookNo) {
+		getConnection();
+		GuestBookVo guestbookVo = null;
+		
+		try {
+			String query = "";
+			query += " select  no, ";
+			query += "         name, ";
+			query += "         password, ";
+			query += "         content, ";
+			query += "         reg_date ";
+			query += " from  guestbook1 ";
+			query += " where  no = ? ";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, guestbookNo);
+		
+			rs = pstmt.executeQuery();
+			
+			
+			//결과처리
+			while(rs.next()) {
+				int no = rs.getInt("no");
+				String name = rs.getString("name");
+				String password = rs.getString("password");
+				String content = rs.getString("content");
+				String regDate = rs.getString("reg_date");
+				
+				guestbookVo = new GuestBookVo(no, name, password, content, regDate);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		return guestbookVo;
 	}
 }

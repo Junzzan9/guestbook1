@@ -10,16 +10,12 @@
 String name = request.getParameter("name");
 String pw = request.getParameter("pw");
 String content = request.getParameter("content");
-
 GuestBookDao gDao = new GuestBookDao();
 GuestBookVo gVo = new GuestBookVo(name, pw, content);
-
 gDao.postAdd(gVo);
-
 /*
 System.out.println(name + hp + com);
 */
-
 List<GuestBookVo> pList = gDao.getPostList();
 %>
 <!DOCTYPE html>

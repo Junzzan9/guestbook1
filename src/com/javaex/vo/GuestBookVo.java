@@ -7,7 +7,14 @@ public class GuestBookVo {
 	private String pw;
 	private String content;
 	private String date;
-
+	
+	public GuestBookVo(int no, String password) {
+		super();
+		this.no = no;
+		this.pw = password;
+	}
+	
+	
 	public GuestBookVo( String name, String pw, String content) {
 		this.name = name;
 		this.pw = pw;
